@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
+    <style type="text/css">
+    html,body {
+      height: 100%;
+    }
+
+    p {
+      font-size: 15px;
+    }
+    </style>
+  </head>
+  <body>
+
+     <!-- All the single topbars -->
+     <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container">
+          <h3><a href="#">Code Tutor</a></h3>
+          <ul class="nav">
+            <li class="active"><a href="#masthead">Overview</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#logout">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="container" style="height: 100%; overflow: hidden;">
+
+      <!-- It's just a step to the left -->
+      <div style="float:left; width:50%; height: 100%; padding-top: 40px; border-right: 3px solid #909090;">
+        <div class="well" style="text-align: right;">
+          <button class="btn primary">Run</button>
+          <button class="btn error">Save</button>
+        </div>
+      </div>
+
+      <!-- And a jump to the right -->
+      <div style="margin-left:50%; height: 100%; padding-top: 40px;">
+
+          <div id="top_right" style="height: 35%; position:relative;">
+
+          <div id="code" style="margin: 25px;">
+            <h2>Loops</h2>
+            <p>Loops in Javascript look a little something like this....</p>
+          </div>
+
+	  <div class="pagination" style="position: absolute; top: 100%; margin-top: -50px; left: 50%; margin-left: -140px">
+	  <ul>
+	    <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+	    <li class="active"><a href="#">1</a></li>
+	    <li><a href="#">2</a></li>
+	    <li><a href="#">3</a></li>
+	    <li><a href="#">4</a></li>
+	    <li><a href="#">5</a></li>
+	    <li class="next"><a href="#">Next &rarr;</a></li>
+	  </ul>
+	</div>
+        </div>
+
+        <div id="bottom_right" style="height: 65%; border-top: 2px solid #909090;">
+          <div id="map">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
