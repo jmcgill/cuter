@@ -1,0 +1,13 @@
+application: code-tutor
+version: 1
+runtime: python
+default_expiration: "1m"
+api_version: 1
+
+handlers:
+- url: /static
+  static_dir: static
+- url: /ace
+  static_dir: ace
+- url: /.*
+  script: main.py

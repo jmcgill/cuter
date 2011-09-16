@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <title>Table of Contents</title>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css">
+    <style type="text/css">
+    html,body {
+      height: 100%;
+    }
+
+    p {
+      font-size: 15px;
+    }
+    </style>
+    <script src="/static/{{ project }}.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    function main() {
+      var base_url = "/{{ project }}#";
+      for (var i = 0; i < toc.length; ++i) {
+        var title = toc[i].replace(/_/g, ' ');
+        document.getElementById("list").innerHTML += '<a href="' + base_url + i + '">' + 
+            title[0].toUpperCase() + title.substr(1, title.length) + '</a><br>'; 
+      }
+    }
+    </script>
+  </head>
+  <body onload="main()" style="background: url('/static/check.png')">
+
+     <!-- All the single topbars -->
+     <div class="topbar">
+      <div class="topbar-inner" style="text-align: center;">
+        <div class="container" style="text-align: center;">
+          <h3><a href="#">Code Tutor</a></h3>
+          <ul class="nav">
+            <li class="active"><a href="#masthead">Overview</a></li>
+            <li><a href="/{{ project }}">Home</a></li>
+            <li><a href="/toc/{{ project }}/toc">Table of Contents</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 40px; background: white; height: 100%; border-left: solid 2px #808080; border-right: solid 2px #808080; padding: 20px;">
+    <h1>Table of Contents</h1>
+    <div id="list"></div>
+    </div>
+</html>
