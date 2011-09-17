@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>Cuter</title>
-    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.2.0.min.css">
+    <!-- A modified version of Twitters Bootstrap CSS with auto-globbing of inputs disabled -->
+    <link rel="stylesheet" href="static/twitter.css">
     <style type="text/css">
     html,body {
       height: 100%;
@@ -44,10 +45,11 @@
     <div id="container" style="height: 100%; overflow: hidden;">
 
       <!-- It's just a step to the left -->
-      <div style="float:left; width:50%; height: 100%; padding-top: 40px; border-right: 3px solid #909090;">
-        <div class="well" style="background: url('static/check.png'); text-align: right; margin-bottom: 0px;">
+      <div id="sidebar" style="float:left; width:50%; height: 100%; padding-top: 40px; border-right: 3px solid #909090;">
+        <div id="controls" class="well" style="background: url('static/check.png'); text-align: right; margin-bottom: 0px;">
           <button class="btn primary" onclick="run()">Run</button>
           <button class="btn" onclick="reset()">Reset</button>
+          <button class="btn" onclick="showHtml()">Show Elements</button>
         </div>
         <div style="height: 2px; width: 100%; background: #404040;"></div>
         <div id="code" style="height: 90%; width: 50%;"></div>
@@ -72,10 +74,10 @@
         </div>
 
         <div id="bottom_right" style="height: 50%; border-top: 2px solid #909090;">
-        <div id="map_canvas" style="height:100%;"></div>
         </div>
       </div>
     </div>
+
   </body>
 
 </html>

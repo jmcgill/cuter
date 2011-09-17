@@ -1,6 +1,7 @@
 var slide_number = null;
 var editor;
 var code;
+var html;
 
 function main(toc) {
   editor = ace.edit("code");
@@ -13,6 +14,20 @@ function main(toc) {
 
   // Load the first slide.
   setSlide(getSlideNumber());
+
+  // Size the UI.
+  resize();
+  $(window).resize(resize);
+}
+
+function resize() {
+  var well = $("#controls");
+  var sidebar = $("#sidebar");
+  var editor_div = $("#code");
+
+  // We subtract an additional 40 px to account for the topbar.
+  editor_div.css('height', (sidebar.height() - well.outerHeight() - 42) + 'px');
+  editor.resize();
 }
 
 function slideLoaded(data) {
@@ -20,11 +35,32 @@ function slideLoaded(data) {
   var response = eval('(' + data + ')')
   slide.innerHTML = response['slide'];
 
+  // Add a link to the HTML.
+  slide.innerHTML += '<br><br>' +
+    '<a style="text-align: center;" onClick="viewHtml">' +
+      'View HTML' +
+    '</a>';
+
   if (response['code']) {
     code = response['code'];
+
+    // Show the output console.
+    $("#top_right").css('height', '50%');
+    $("#bottom_right").css('height', '50%');
   } else {
     code = "// No code for this excercise!";
+
+    // Hide the output console.
+    $("#top_right").css('height', '100%');
+    $("#bottom_right").css('height', '0%');
   }
+
+  if (response['html']) {
+    html = response['html'];
+  } else {
+    html = "";
+  }
+  setHtml(html, true);
 
   // Do we already have code for this?
   if (hasStorage()) {
@@ -102,7 +138,7 @@ function previous() {
 }
 
 function run() {
-  $("#map_canvas").html();
+  setHtml(html, false);  
   var code = editor.getSession().getValue();
   eval( code );
   initialize();
@@ -114,5 +150,32 @@ function reset() {
     editor.getSession().setValue(code);
     localStorage.removeItem('' + slide_number);
   }
-  $("#map_canvas").html();
+  setHtml(html, true);
+}
+
+function setHtml(html, highlight) {
+  $("#bottom_right").html(html);
+
+  // Should we highlight each element?
+  if (!highlight) return;
+
+  // Label each element in the supplied HTML.
+  $('#bottom_right').children().each(function(){
+    // We must treat inputs differently.
+   window.console.log($(this).attr('tag'));
+   
+   if (this.nodeName == 'INPUT') {
+     $(this).attr('value', $(this).attr('id'));
+   } else {
+     $(this).css('background', 'url(static/check.png)');
+     $(this).css('color', '#404040');
+     $(this).css('padding', '5px');
+     $(this).css('border', '1px solid white');
+     $(this).html('<h3>' + $(this).attr('id') + '</h3>');
+   }
+  });   
+}
+
+function showHtml() {
+  setHtml(html, true);
 }

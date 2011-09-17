@@ -37,13 +37,19 @@ class Slide(webapp.RequestHandler):
     output = {}
 
     if len(parts) > 1:
-      output['code'] = parts[1].strip()
+      # Split into code and html
+      html = parts[1].split('### HTML')
+      output['code'] = html[0].strip()
+
+      if len(html) > 1:
+        output['html'] = html[1].strip()
+      else:
+        output['html'] = '<div id="map_canvas" style="height: 100%;"></div>'
+
     output['slide'] = markdown.markdown(parts[0])
     file.close()
 
     self.response.out.write(json.dumps(output))
-
-# TODO(jmcgill): Consider adding Saving and Loading.
 
 application = webapp.WSGIApplication([
     ('/slide/(.*)', Slide),

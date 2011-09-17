@@ -23,3 +23,9 @@ function initialize() {
         
     map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
 }
+
+### HTML
+<input type="text" id="name"></div>
+<input type="button" id="click" value="click"></div>
+
+<div id="map_canvas" style="height: 90%;"></div>
