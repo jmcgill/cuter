@@ -68,14 +68,14 @@ function slideLoaded(data) {
 
   if (response['html']) {
     html = response['html'];
+
+    // Add details of the HTML.
+    var escaped_html = $('<div/>').text(html).html();
+    slide.innerHTML += '<br><h4>HTML</h4><pre class="prettyprint">' + escaped_html + '</pre>';
   } else {
     html = "";
   }
   setHtml(html, true);
-
-  // Add details of the HTML.
-  var escaped_html = $('<div/>').text(html).html();
-  slide.innerHTML += '<br><h4>HTML</h4><pre class="prettyprint">' + escaped_html + '</pre>';
   prettyPrint();
 
   // Do we already have code for this?

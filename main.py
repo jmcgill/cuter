@@ -47,6 +47,9 @@ class Slide(webapp.RequestHandler):
         output['html'] = '<div id="map_canvas" style="height: 100%;"></div>'
 
     output['slide'] = markdown.markdown(parts[0])
+    
+    # Syntax highlighting.
+    output['slide'] = output['slide'].replace('<pre', '<pre class="prettyprint"')
     file.close()
 
     self.response.out.write(json.dumps(output))
