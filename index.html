@@ -4,6 +4,7 @@
     <title>Cuter</title>
     <!-- A modified version of Twitters Bootstrap CSS with auto-globbing of inputs disabled -->
     <link rel="stylesheet" href="static/twitter.css">
+    <link rel="stylesheet" href="google-code-prettify/prettify.css">
     <style type="text/css">
     html,body {
       height: 100%;
@@ -20,8 +21,11 @@
     <script src="ace/ace.js" type="text/javascript"></script>
     <script src="ace/theme-idle_fingers.js" type="text/javascript"></script>
     <script src="ace/mode-javascript.js" type="text/javascript"></script>
+    <script src="ace/mode-html.js" type="text/javascript"></script>
     <script src="static/cuter.js" type="text/javascript"></script>
     <script src="static/storage.js" type="text/javascript"></script>
+    <script src="static/{{ project }}.js" type="text/javascript"></script>
+    <script src="google-code-prettify/prettify.js" type="text/javascript"></script>
     <script src="static/{{ project }}.js" type="text/javascript"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> 
@@ -52,7 +56,8 @@
           <button class="btn" onclick="showHtml()">Show Elements</button>
         </div>
         <div style="height: 2px; width: 100%; background: #404040;"></div>
-        <div id="code" style="height: 90%; width: 50%;"></div>
+        <div id="code" style="height: 50%; width: 50%;"></div>
+        <div id="html" style="height: 50%;"></div>
       </div>
 
       <!-- And a jump to the right -->

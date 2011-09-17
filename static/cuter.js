@@ -2,15 +2,25 @@ var slide_number = null;
 var editor;
 var code;
 var html;
+var html_editor;
 
 function main(toc) {
+  // Create a Javascript editor.
   editor = ace.edit("code");
   editor.setTheme("ace/theme/idle_fingers");
   editor.setShowPrintMargin(false);
   editor.setHighlightActiveLine(true);
- 
   var JavaScriptMode = require("ace/mode/javascript").Mode;
   editor.getSession().setMode(new JavaScriptMode());
+
+  // Create a HTML editor.
+  html_editor = ace.edit("html");
+  html_editor.setTheme("ace/theme/idle_fingers");
+  html_editor.setShowPrintMargin(false);
+  html_editor.setHighlightActiveLine(true);
+
+  var HtmlMode = require("ace/mode/html").Mode;
+  html_editor.getSession().setMode(new HtmlMode());
 
   // Load the first slide.
   setSlide(getSlideNumber());
@@ -24,22 +34,23 @@ function resize() {
   var well = $("#controls");
   var sidebar = $("#sidebar");
   var editor_div = $("#code");
+  var html_div = $("#html");
+
+  var code_to_html_ratio = 1.0;
 
   // We subtract an additional 40 px to account for the topbar.
-  editor_div.css('height', (sidebar.height() - well.outerHeight() - 42) + 'px');
+  editor_div.css('height', ((sidebar.height() - well.outerHeight() - 42) * code_to_html_ratio) + 'px');
+  html_div.css('height', ((sidebar.height() - well.outerHeight() - 42) * (1 - code_to_html_ratio)) + 'px');
+  html_div.css('top', ((sidebar.height() - well.outerHeight() - 42) * (code_to_html_ratio)) + 'px');
+  html_div.css('position', 'relative');
   editor.resize();
+  html_editor.resize();
 }
 
 function slideLoaded(data) {
   var slide = document.getElementById("slide");
   var response = eval('(' + data + ')')
   slide.innerHTML = response['slide'];
-
-  // Add a link to the HTML.
-  slide.innerHTML += '<br><br>' +
-    '<a style="text-align: center;" onClick="viewHtml">' +
-      'View HTML' +
-    '</a>';
 
   if (response['code']) {
     code = response['code'];
@@ -61,6 +72,11 @@ function slideLoaded(data) {
     html = "";
   }
   setHtml(html, true);
+
+  // Add details of the HTML.
+  var escaped_html = $('<div/>').text(html).html();
+  slide.innerHTML += '<br><h4>HTML</h4><pre class="prettyprint">' + escaped_html + '</pre>';
+  prettyPrint();
 
   // Do we already have code for this?
   if (hasStorage()) {
@@ -155,6 +171,7 @@ function reset() {
 
 function setHtml(html, highlight) {
   $("#bottom_right").html(html);
+  html_editor.getSession().setValue(html);
 
   // Should we highlight each element?
   if (!highlight) return;

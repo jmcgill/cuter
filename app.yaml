@@ -9,5 +9,7 @@ handlers:
   static_dir: static
 - url: /ace
   static_dir: ace
+- url: /google-code-prettify
+  static_dir: google-code-prettify
 - url: /.*
   script: main.py
