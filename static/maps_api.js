@@ -3,5 +3,9 @@
 var toc = [
   'page_structure',
   'a_simple_map',
-  'test'
+  'marker',
+  'custom_markers',
+  'events',
+  'map_events',
+  'challenge_1'
 ];
