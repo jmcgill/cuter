@@ -5,6 +5,7 @@ except:
 import markdown
 import os
 
+from google.appengine.api import memcache
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -12,22 +13,42 @@ from google.appengine.ext.webapp import template
 
 class Index(webapp.RequestHandler):
   def get(self, project):
+    index = memcache.get("index")
+    if index is not None:
+      self.response.out.write(index)
+      return
+
     path = os.path.join(os.path.dirname(__file__), 'index.html')
     values = {
       'project': project
     }
-    self.response.out.write(template.render(path, values))
+
+    index = template.render(path, values)
+    memcache.add("index", index)
+    self.response.out.write(index)
 
 class Toc(webapp.RequestHandler):
   def get(self, project):
+    toc = memcache.get("toc")
+    if toc is not None:
+      self.response.out.write(toc)
+      return
+
     path = os.path.join(os.path.dirname(__file__), 'toc.html')
     values = {
       'project': project
     }
-    self.response.out.write(template.render(path, values))
+    toc = template.render(path, values)
+    memcache.add("toc", toc)
+    self.response.out.write(toc)
 
 class Slide(webapp.RequestHandler):
   def get(self, name):
+    slide = memcache.get("slide/" + name)
+    if slide is not None:
+      self.response.out.write(slide)
+      return
+
     path = os.path.join(os.path.dirname(__file__), 'slides', name + '.mu')
 
     # Split into code and an instructional slide.
@@ -52,7 +73,9 @@ class Slide(webapp.RequestHandler):
     output['slide'] = output['slide'].replace('<pre', '<pre class="prettyprint"')
     file.close()
 
-    self.response.out.write(json.dumps(output))
+    slide = json.dumps(output)
+    memcache.add("slide/" + name, slide)
+    self.response.out.write(slide)
 
 application = webapp.WSGIApplication([
     ('/slide/(.*)', Slide),
