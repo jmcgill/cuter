@@ -15,7 +15,8 @@ from google.appengine.ext.webapp import template
 
 class Index(webapp.RequestHandler):
   def get(self, project):
-    index = memcache.get("index")
+    key = "index" + project
+    index = memcache.get(key)
     if index is not None:
       self.response.out.write(index)
       return
@@ -26,12 +27,13 @@ class Index(webapp.RequestHandler):
     }
 
     index = template.render(path, values)
-    memcache.add("index", index)
+    memcache.add(key, index)
     self.response.out.write(index)
 
 class Toc(webapp.RequestHandler):
   def get(self, project):
-    toc = memcache.get("toc")
+    key = "toc" + project
+    toc = memcache.get(key)
     if toc is not None:
       self.response.out.write(toc)
       return
@@ -41,7 +43,7 @@ class Toc(webapp.RequestHandler):
       'project': project
     }
     toc = template.render(path, values)
-    memcache.add("toc", toc)
+    memcache.add(key, toc)
     self.response.out.write(toc)
 
 class Slide(webapp.RequestHandler):
