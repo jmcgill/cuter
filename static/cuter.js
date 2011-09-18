@@ -4,14 +4,24 @@ var code;
 var html;
 var html_editor;
 
+// Used to store code state when localStorage is not available. Does not persist
+// between sessions.
+var history = {};
+
 function main(toc) {
   // Create a Javascript editor.
   editor = ace.edit("code");
   editor.setTheme("ace/theme/idle_fingers");
   editor.setShowPrintMargin(false);
-  editor.setHighlightActiveLine(true);
-  var JavaScriptMode = require("ace/mode/javascript").Mode;
-  editor.getSession().setMode(new JavaScriptMode());
+
+  if ($.browser.msie) {
+    editor.setHighlightActiveLine(false);
+    editor.getSession().setUseWrapMode(false);
+  } else {
+    editor.setHighlightActiveLine(true);
+    var JavaScriptMode = require("ace/mode/javascript").Mode;
+    editor.getSession().setMode(new JavaScriptMode());
+  }
 
   // Create a HTML editor.
   // html_editor = ace.edit("html");
@@ -49,6 +59,33 @@ function resize() {
   // html_editor.resize();
 }
 
+function save(key, value) {
+  if (hasStorage()) {
+    localStorage.setItem(key, value);
+    return;
+  }
+
+  history[key] = value;
+}
+
+function load(key) {
+  if (hasStorage()) {
+    var stored_code = localStorage.getItem(key);
+    return stored_code;
+  }
+
+  return history[key];
+}
+
+function remove() {
+  if (hasStorage()) {
+    localStorage.removeItem('' + slide_number);
+    return;
+  }
+
+  if (history[key]) delete history[key];
+}
+
 function slideLoaded(data) {
   var slide = document.getElementById("slide");
   var response = eval('(' + data + ')')
@@ -78,24 +115,21 @@ function slideLoaded(data) {
     html = "";
   }
   setHtml(html, true);
-  // prettyPrint();
+  prettyPrint();
 
   // Do we already have code for this?
-  if (hasStorage()) {
-    var stored_code = localStorage.getItem('' + slide_number);
-    if (stored_code) {
-      editor.getSession().setValue(stored_code);
-      return;
-    }
+  var saved_code = load('' + slide_number);
+  if (saved_code) {
+    editor.getSession().setValue(saved_code);
+  } else {
+    editor.getSession().setValue(code);
   }
-
-  editor.getSession().setValue(code);
 }
 
 function setSlide(index) {
   // Save the code, if we can.
-  if (hasStorage() && slide_number != null) {
-    localStorage.setItem('' + slide_number, editor.getSession().getValue());
+  if (slide_number != null) {
+    save('' + slide_number, editor.getSession().getValue());
   }
 
   slide_number = index;
@@ -166,9 +200,7 @@ function reset() {
   var answer = confirm("Are you sure you want to throw away your code?");
   if (answer) {
     editor.getSession().setValue(code);
-    if (hasStorage()) {
-      localStorage.removeItem('' + slide_number);
-    }
+    remove('' + slide_number);
   }
   setHtml(html, true);
 }
@@ -184,7 +216,6 @@ function setHtml(html, highlight) {
   $('#bottom_right').children().each(function(){
     // We must treat inputs differently.
   
-   alert(this.nodeName.toUpperCase());
    if (this.nodeName.toUpperCase() == 'INPUT') {
      $(this).attr('value', $(this).attr('id'));
    } else {
