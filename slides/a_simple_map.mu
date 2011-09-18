@@ -25,7 +25,7 @@ function initialize() {
 }
 
 ### HTML
-<input type="text" id="name"></div>
-<input type="button" id="click" value="click"></div>
+<input type="text" id="name"/>
+<input type="button" id="click" value="click"/>
 
 <div id="map_canvas" style="height: 90%;"></div>

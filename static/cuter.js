@@ -14,13 +14,13 @@ function main(toc) {
   editor.getSession().setMode(new JavaScriptMode());
 
   // Create a HTML editor.
-  html_editor = ace.edit("html");
-  html_editor.setTheme("ace/theme/idle_fingers");
-  html_editor.setShowPrintMargin(false);
-  html_editor.setHighlightActiveLine(true);
+  // html_editor = ace.edit("html");
+  // html_editor.setTheme("ace/theme/idle_fingers");
+  // html_editor.setShowPrintMargin(false);
+  // html_editor.setHighlightActiveLine(true);
 
-  var HtmlMode = require("ace/mode/html").Mode;
-  html_editor.getSession().setMode(new HtmlMode());
+  // var HtmlMode = require("ace/mode/html").Mode;
+  // html_editor.getSession().setMode(new HtmlMode());
 
   // Load the first slide.
   setSlide(getSlideNumber());
@@ -40,11 +40,13 @@ function resize() {
 
   // We subtract an additional 40 px to account for the topbar.
   editor_div.css('height', ((sidebar.height() - well.outerHeight() - 42) * code_to_html_ratio) + 'px');
+  editor_div.css('width', sidebar.width() + 'px');
+
   html_div.css('height', ((sidebar.height() - well.outerHeight() - 42) * (1 - code_to_html_ratio)) + 'px');
   html_div.css('top', ((sidebar.height() - well.outerHeight() - 42) * (code_to_html_ratio)) + 'px');
   html_div.css('position', 'relative');
   editor.resize();
-  html_editor.resize();
+  // html_editor.resize();
 }
 
 function slideLoaded(data) {
@@ -76,7 +78,7 @@ function slideLoaded(data) {
     html = "";
   }
   setHtml(html, true);
-  prettyPrint();
+  // prettyPrint();
 
   // Do we already have code for this?
   if (hasStorage()) {
@@ -173,7 +175,7 @@ function reset() {
 
 function setHtml(html, highlight) {
   $("#bottom_right").html(html);
-  html_editor.getSession().setValue(html);
+  // html_editor.getSession().setValue(html);
 
   // Should we highlight each element?
   if (!highlight) return;
@@ -181,11 +183,13 @@ function setHtml(html, highlight) {
   // Label each element in the supplied HTML.
   $('#bottom_right').children().each(function(){
     // We must treat inputs differently.
-   window.console.log($(this).attr('tag'));
-   
-   if (this.nodeName == 'INPUT') {
+  
+   alert(this.nodeName.toUpperCase());
+   if (this.nodeName.toUpperCase() == 'INPUT') {
      $(this).attr('value', $(this).attr('id'));
    } else {
+     // IE creates ghost DIVs for each form element, so we exclude these
+     // by searching for IDs.
      $(this).css('background', 'url(static/check.png)');
      $(this).css('color', '#404040');
      $(this).css('padding', '5px');
