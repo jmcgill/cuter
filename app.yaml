@@ -1,15 +1,18 @@
 application: code-tutor
 version: 1
 runtime: python
-default_expiration: "1m"
+default_expiration: "1h"
 api_version: 1
 
 handlers:
 - url: /static
   static_dir: static
+  expiration: "1h"
 - url: /ace
   static_dir: ace
+  expiration: "1h"
 - url: /google-code-prettify
   static_dir: google-code-prettify
+  expiration: "1h"
 - url: /.*
   script: main.py

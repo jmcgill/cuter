@@ -2,6 +2,8 @@ try:
   import json
 except:
   from django.utils import simplejson as json
+
+import cache
 import markdown
 import os
 
@@ -82,6 +84,7 @@ application = webapp.WSGIApplication([
     ('/toc/(.*)', Toc),
     ('/(.*)', Index),
 ], debug=True)
+application = cache.CacheMiddleware(application)
 
 def main():
   run_wsgi_app(application)
