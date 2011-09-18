@@ -100,7 +100,7 @@ function setSlide(index) {
   slide_name = toc[index];
 
   // Update the hash fragment.
-  window.location = window.location.origin + window.location.pathname + '#' + slide_number;
+  window.location.hash = '#' + slide_number;
 
   $("#slide_number").html('' + (index + 1) + ' / ' + toc.length);
 
@@ -164,7 +164,9 @@ function reset() {
   var answer = confirm("Are you sure you want to throw away your code?");
   if (answer) {
     editor.getSession().setValue(code);
-    localStorage.removeItem('' + slide_number);
+    if (hasStorage()) {
+      localStorage.removeItem('' + slide_number);
+    }
   }
   setHtml(html, true);
 }
