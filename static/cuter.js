@@ -167,11 +167,11 @@ function getSlideNumber() {
 
 function next() {
   var current_slide = getSlideNumber();
-  
+
   // Is this the last slide?
   if (current_slide + 1 == toc.length) {
     return;
-  } 
+  }
 
   setSlide(current_slide + 1);
   return false;
@@ -179,21 +179,21 @@ function next() {
 
 function previous() {
   var current_slide = getSlideNumber();
-  
+
   // Is this the first slide?
   if (current_slide == 0) {
     return;
-  } 
+  }
 
   setSlide(current_slide - 1);
   return false;
 }
 
 function run() {
-  setHtml(html, false);  
+  setHtml(html, false);
   var code = editor.getSession().getValue();
   eval( code );
-  initialize();
+  initialize && initialize();
 }
 
 function reset() {
@@ -215,7 +215,7 @@ function setHtml(html, highlight) {
   // Label each element in the supplied HTML.
   $('#bottom_right').children().each(function(){
     // We must treat inputs differently.
-  
+
    if (this.nodeName.toUpperCase() == 'INPUT') {
      $(this).attr('value', $(this).attr('id'));
    } else {
@@ -227,7 +227,7 @@ function setHtml(html, highlight) {
      $(this).css('border', '1px solid white');
      $(this).html('<h3>' + $(this).attr('id') + '</h3>');
    }
-  });   
+  });
 }
 
 function showHtml() {
