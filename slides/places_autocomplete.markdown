@@ -4,16 +4,19 @@ A common pattern when using the Maps API is to show a search box that
 helps the user navigate to the location they want to see. The Maps API recently
 introduced Autocomplete functionality to solves this problem.
 
-Attaching funcationality to an input field is easy:
+Attaching functionality to an input field is easy:
 
     new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
 
-From here, we can listen to the `place_changed` event, which will provide
-access to details about the selected place.
+From here, we can listen to the `place_changed` event, then call `getPlace()`,
+which returns a {PlaceResult}, providing details about the selected place.
 
     var place = autocomplete.getPlace();
 
-**Challenge:** Display a Marker at the location of the selected Place.
+Check the documentation for `PlaceResult` to see the data that you get
+back, like `PlaceGeometry`.
+
+**Challenge:** Display a {Marker} at the location of the selected {PlaceResult}.
 This can be found via `place.geometry.location`.
 
 **Challenge 2:** Some Places will have the property `place.geometry.viewport`.
