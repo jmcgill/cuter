@@ -10,5 +10,6 @@ var toc = [
   'challenge_1',
   'streetview',
   'streetview_marker',
-  'styled_map'
+  'styled_map',
+  'places_autocomplete'
 ];
