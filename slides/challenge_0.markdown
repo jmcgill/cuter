@@ -8,3 +8,7 @@ Write a program which prompts the user for 2 numbers, adds them together, and th
 
 ### Code
 // Good luck!
+
+### HTML
+<div id="output"></div>
+
