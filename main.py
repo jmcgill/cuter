@@ -33,7 +33,7 @@ class Toc(webapp.RequestHandler):
 
 class Slide(webapp.RequestHandler):
   def get(self, name):
-    path = os.path.join(os.path.dirname(__file__), 'slides', name + '.mu')
+    path = os.path.join(os.path.dirname(__file__), 'slides', name + '.markdown')
 
     # Split into code and an instructional slide.
     file = open(path, 'r')
@@ -52,7 +52,7 @@ class Slide(webapp.RequestHandler):
         output['html'] = '<div id="map_canvas" style="height: 100%;"></div>'
 
     output['slide'] = markdown.markdown(parts[0])
-    
+
     # Syntax highlighting.
     output['slide'] = output['slide'].replace('<pre', '<pre class="prettyprint"')
     file.close()
