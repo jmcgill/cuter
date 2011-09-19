@@ -1,6 +1,10 @@
 // Maps API talk TOC.
 
 var toc = [
+'introduction',
+'javascript_101',
+'logging',
+'variables',
 'a_simple_map',
 'challenge_1',
 'challenge_2',
