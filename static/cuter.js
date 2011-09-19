@@ -23,6 +23,7 @@ function main(toc) {
     editor.getSession().setMode(new JavaScriptMode());
   }
 
+  // Support window.console.log in legacy browsers.
   if (!window.console) {
     window.console = {};
     window.console.log = function(e) {
