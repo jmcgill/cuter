@@ -5,7 +5,7 @@ var toc = [
 'challenge_1',
 'challenge_2',
 'challenge_3',
-'challenge_5',
+'fusion_tables_challenge',
 'custom_markers',
 'directions',
 'events',
