@@ -23,6 +23,14 @@ function main(toc) {
     editor.getSession().setMode(new JavaScriptMode());
   }
 
+  if (!window.console) {
+    window.console = {};
+    window.console.log = function(e) {
+      document.getElementById("map_canvas").innerHTML +=
+          e + "<br>";
+    }
+  }
+
   // Create a HTML editor.
   // html_editor = ace.edit("html");
   // html_editor.setTheme("ace/theme/idle_fingers");
@@ -193,7 +201,7 @@ function run() {
   setHtml(html, false);
   var code = editor.getSession().getValue();
   eval( code );
-  initialize && initialize();
+  if (typeof initialize != "undefined")  initialize();
 }
 
 function reset() {
