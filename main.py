@@ -6,6 +6,7 @@ except:
 import cache
 import markdown
 import os
+import re
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -55,6 +56,10 @@ class Slide(webapp.RequestHandler):
 
     # Syntax highlighting.
     output['slide'] = output['slide'].replace('<pre', '<pre class="prettyprint"')
+ 
+    # Auto linking of the API reference.
+    output['slide'] = re.sub(r'\{([A-Za-z]+)\}',
+        '<code><a href="http://code.google.com/apis/maps/documentation/javascript/reference.html#\\1" target="\\1">\\1</a></code>', output['slide'])
     file.close()
 
     slide = json.dumps(output)
