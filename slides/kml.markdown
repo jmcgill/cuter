@@ -6,8 +6,18 @@ Lots of organizations publish interesting information in KML format. It's also a
 
 Many applications (including Google Earth) can display KML files.
 
----
+The code on the left is a simple KML document, with a single point.
 
-The code on the left displays the KML file hosted at 
-
-The one catch is that your KML file **must** be available on the public Internet. You will need to upload it to a server which other people can access.
+### Code
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>Simple Document</name>
+  <Placemark>
+     <name>A point</name>
+     <Point>
+       <coordinates>-90.86948943473118,48.25450093195546,0</coordinates>
+     </Point>
+  </Placemark>
+</Document>
+</kml>

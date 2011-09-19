@@ -22,5 +22,3 @@ function initialize() {
     var marker = new google.maps.Marker(options);
     marker.setMap(map);
 }
-
-
