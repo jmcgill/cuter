@@ -9,7 +9,7 @@ The type of map to display is controlled by the mapTypeId parameter. Valid mapTy
 - google.maps.MapTypeId.TERRAIN
 - google.maps.MapTypeId.SATELLITE
 
-Try changing the Latitude and Longitude in the example on the left, and see if you can center the map on Brisbane.
+Try changing the map type to satellite in the example on the left.
 
 ### Code
 var map;
@@ -17,7 +17,7 @@ var map;
 function initialize() {
     var myOptions = {
       zoom: 8,
-      center: new google.maps.LatLng(-34.397, 150.644),
+      center: new google.maps.LatLng(-27.463347, 153.02496),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 

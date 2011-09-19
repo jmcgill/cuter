@@ -32,4 +32,6 @@ var toc = [
 'polylines',
 'streetview',
 'streetview_marker',
-'styled_map'];
+'styled_map',
+'places_autocomplete'
+];
