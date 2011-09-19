@@ -7,5 +7,8 @@ var toc = [
   'custom_markers',
   'events',
   'map_events',
-  'challenge_1'
+  'challenge_1',
+  'streetview',
+  'streetview_marker',
+  'styled_map'
 ];
