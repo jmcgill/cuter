@@ -33,5 +33,6 @@ var toc = [
 'streetview',
 'streetview_marker',
 'styled_map',
-'places_autocomplete'
+'places_autocomplete',
+'places'
 ];
