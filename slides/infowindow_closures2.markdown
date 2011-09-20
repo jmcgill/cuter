@@ -1,6 +1,6 @@
 ### Closures
 
-The code has now been fixed so that the info window opens at the marker that was clicked.
+The example has now been modified so that the {InfoWindow} opens at the {Marker} that was clicked.
 
 The event listener is now added in a separate function:
 
@@ -10,9 +10,9 @@ The event listener is now added in a separate function:
       });
     }
 
-This works because `marker` refers to the `marker` that is the argument to `addListenerToMarker`. Each event listener is created inside a different call to `addListenerToMarker` and has a reference to a different `marker` variable.
+Now `marker` refers to the `marker` that is the argument to `addListenerToMarker`. Each event listener is created inside a different call to `addListenerToMarker` and has a reference to a different `marker` variable.
 
-Try changing the code on the left so that the info window says "You clicked marker #1" for the first marker, "#2" for the second marker, and so on.
+Try changing the code so that the {InfoWindow} contains the content "You clicked marker #1" for the first marker, "#2" for the second marker, and so on.
 
 ### Code
 function initialize() {

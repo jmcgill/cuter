@@ -2,7 +2,7 @@
 
 KML is an open XML format for representing geographic information, like markers, polygons, polylines and overlays.
 
-Lots of organizations publish interesting information in KML format. It's also a useful way to store and distribute information to other people.
+Many organisations publish interesting information in KML format. It's also a useful way to store and distribute information to other people.
 
 Many applications (including Google Earth) can display KML files.
 
@@ -21,3 +21,5 @@ The code on the left is a simple KML document, with a single point.
   </Placemark>
 </Document>
 </kml>
+
+### HTML

@@ -1,10 +1,10 @@
 ### Geocoder
 
-Geocoding is the act of turning an address string into Lat/Lng coordinates. The Maps API has a built in geocoding service which, given an address, returns the coordinates. Some addresses may have multiple results; for example, "Brisbane" might mean "Brisbane, Queensland" or "Brisbane, California".
+Geocoding is the act of turning an address string into lat/long coordinates. The Maps API has a built in geocoding service which, given an address, returns the coordinates. Some addresses may have multiple results; for example, "Brisbane" might mean "Brisbane, Queensland" or "Brisbane, California".
 
-The `Geocoder` makes an asynchronous request to a Google server.  When the response returns, the Geocoder will call the function that you specify when making the request. A function passed as an argument to another function is called a _callback_. The arguments of your callback must be an array of results and a status code. If the geocode was successful, the status will be `google.maps.GeocoderStatus.OK`.
+The {Geocoder} makes an asynchronous request to a Google server. When the response returns, the Geocoder will call the function that you specify when making the request. A function passed as an argument to another function is called a _callback_. The arguments of your callback must be an array of results and a status code. If the geocode was successful, the status will be `google.maps.GeocoderStatus.OK`.
 
-Create a `Geocoder` object and call `geocode` to get the coordinate for an addres.  Then add a marker at that point on the map and pan to it (`map.panTo`).
+Create a {Geocoder} object and call `geocode` to get the coordinate for an address. Then add a marker at that point on the map and pan to it (`map.panTo`).
 
 ### Code
 function initialize() {

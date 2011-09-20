@@ -1,8 +1,8 @@
-### Warmup challenge
+### Warm-up challenge
 
-Write a program which prompts the user for 2 numbers, adds them together, and then displays them using an alert (just to be annoying).
+Write a program that prompts the user for 2 numbers, adds them together, and then displays them using an alert (just to be annoying).
 
-**Hint**: To convert a string to a number use parseInt:
+**Hint**: To convert a string to a number use `parseInt`:
 
     parseInt("5") == 5
 
@@ -10,5 +10,4 @@ Write a program which prompts the user for 2 numbers, adds them together, and th
 // Good luck!
 
 ### HTML
-<div id="output"></div>
 

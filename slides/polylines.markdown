@@ -1,23 +1,25 @@
 ### Polylines
 
-Polylines are used to connect points on the globe. Each Maps API Polyline uses an array of LatLng objects to determine what points to connect.
+Polylines are used to connect points on the globe. Each {Polyline} uses an array of {LatLng}s to determine the points to connect.
 
-Arrays in Javascript collect groups of objects, and look like this:
+Arrays in JavaScript collect groups of objects, and look like this:
 
     var array = [
         ...,
-	...
+        ...,
+        ...
     ];
 
-The code on the left shows the trip we made from Sydney to get here.
+The map in this example shows the route we took to get from Sydney to
+Brisbane.
 
 You can control the appearance of Polylines using the {PolylineOptions} object.
 
 ### Code
 function initialize() {
     var myOptions = {
-      zoom: 8,
-      center: new google.maps.LatLng(-34.397, 150.644),
+      zoom: 5,
+      center: new google.maps.LatLng(-31.7, 152.32),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 

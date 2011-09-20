@@ -1,8 +1,8 @@
 ### KML on Maps
 
-Like Google Earth, the Maps API can load and display KML files. Using KML files also lets the Maps API display more complex shapes than with google.maps.Polyline/Polygon, as the file is rendered by Google's servers.
+Like Google Earth, the Maps API can load and display KML files. Using KML files also lets the Maps API display more complex shapes than with {Polyline}/{Polygon}, as the file is rendered by Google's servers.
 
-The code on the left displays the KML file hosted at http://goo.gl/QXdPQ. Download the file and take a look at the structure.
+The code on the left displays the KML file hosted at [goo.gl/QXdPQ](http://goo.gl/QXdPQ). Download the file and take a look at the structure.
 
 The one catch is that your KML file **must** be available on the public Internet to use it with the Maps API. You will need to upload it to a server which other people can access.
 

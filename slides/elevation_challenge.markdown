@@ -19,4 +19,4 @@ Display the net elvation in the `output` HTML DIV, and the path taken as a {Poly
 ### HTML
 <input id="start"/><input type="button" id="button" value="Route!"/>
 <div id="output"></div>
-<div id="map_canvas" height="100%"></div>
+<div id="map_canvas" style="height:80%"></div>

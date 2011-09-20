@@ -1,14 +1,12 @@
-### Info windows
+### Info Windows
 
-An {InfoWindow} displays floating content above the map, in a window that looks like a comic-book word balloon.
+An {InfoWindow} displays content in a bubble on the map.
 
-Use `infowindow.open` to open an info window on a map.
-
-You can also make it open at the same position as a marker, by also specifying the marker when you call open:
+Use `open` to open an info window on a map. You can optionally open the info window at a marker, by passing in the {Marker} as a second parameter.
 
     infowindow.open(map, marker);
 
-See if you can make the infowindow open at the marker's (random!) position when you click on the marker.
+Make the info window open at the marker's position when you click on the marker.
 
 ### Code
 function initialize() {

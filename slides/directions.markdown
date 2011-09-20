@@ -1,10 +1,10 @@
 ### Directions
 
-The Maps API also provides access to Google's directions servers through the `DirectionsService`.  Directions can be found between two or more locations in either address format or Lat/Lng coordinates.
+The Maps API also provides access to Google's directions finder through {DirectionsService}.  Directions can be found between two or more locations in either address format or lat/long coordinates.
 
-Requests for directions are similar to geocoding.  Once the directions result is returned, however, it can be displayed on the map using the `DirectionsRenderer`.  The renderer can also display directions in list form.
+Requests for directions are similar to geocoding. Once the directions result is returned, it can be displayed on the map using {DirectionsRenderer}. Additionally, {DirectionsRenderer} can also display directions in list form.
 
-Try modifying the code to make the drive through Canberra a stopover.  You can also make the directions editable by {DirectionsRendererOptions}dragging.
+Try modifying the code to make the drive through Canberra a stopover.  You can also make the directions editable by {DirectionsRendererOptions} dragging.
 
 ### Code
 function initialize() {
@@ -44,6 +44,6 @@ function initialize() {
 
 ### HTML
 
-<div id="panel" style="height: 100%; width:49%; padding: 0; float:right; overflow: auto"></div>
-<div id="map_canvas" style="height: 100%; width:49%"></div>
+<div id="panel" style="height: 100%; width: 49%; float: right; overflow: auto"></div>
+<div id="map_canvas" style="height: 100%; width: 49%"></div>
 

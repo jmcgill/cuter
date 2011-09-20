@@ -1,8 +1,8 @@
-### Polylines
+### Polygons
 
-Polygons are like polylines, but closed and (optionally) filled.
+{Polygon}s are like {Polyline}s, but closed and optionally filled.
 
-The code on the right makes an Australian shaped Polygon. Kind of.
+This code sample makes an Australian shaped Polygon.
 
 ### Code
 function initialize() {

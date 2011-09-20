@@ -1,8 +1,9 @@
 ### Closures
 
-What if we have multiple markers that open info windows when they are clicked?
+The intent of this code example is to open an info window whenever any
+of the five markers are clicked.
 
-Run the code on the left and see what happens. The code tries to open the info window at a marker when that marker is clicked. But why does the info window always open at the last marker even if you click on one of the other markers?
+**Run** the code and see what happens.
 
 Let's look at the code used to open the info window:
 
@@ -10,7 +11,15 @@ Let's look at the code used to open the info window:
       infowindow.open(map, marker);
     });
 
-The `marker` inside the function is a reference to the `marker` defined outside the function: this is an example of a **closure** in JavaScript, where the function remembers the environment in which it was created. And after the for loop has finished, `marker` is the last marker created.
+The `marker` inside the function is a reference to the `marker` defined outside
+the function. This is an example of a *closure*, where the function remembers
+the environment in which it was created. This feature of JavaScript is powerful,
+but must be used carefully. In this example, there is an error. `marker` always
+references the last marker.
+
+This is because JavaScript does not have block scope. The scope in this case is
+the enclosing function (`initialize`). At the end of the `for` loop, `marker`
+contains a reference to the last marker.
 
 ### Code
 function initialize() {
