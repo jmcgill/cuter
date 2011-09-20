@@ -8,7 +8,6 @@ var toc = [
 'challenge_0',
 'a_simple_map',
 'challenge_1',
-'challenge_2',
 'challenge_3',
 'fusion_tables_challenge',
 'custom_markers',
@@ -34,5 +33,7 @@ var toc = [
 'streetview',
 'streetview_marker',
 'styled_map',
-'places_autocomplete'
+'places_autocomplete',
+'elevation',
+'elevation_challenge'
 ];
