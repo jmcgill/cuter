@@ -19,7 +19,7 @@ function initialize() {
     samples: 256
   };
 
-  elevator.getElevationAlongPath(request, callback);
+  elevation_service.getElevationAlongPath(request, callback);
 }
 
 function callback(results, status) {
@@ -32,4 +32,3 @@ function callback(results, status) {
     window.console.log(results[i].elevation);
   }
 }
-
