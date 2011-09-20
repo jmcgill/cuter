@@ -47,25 +47,36 @@ function main(toc) {
   // Size the UI.
   resize();
   $(window).resize(resize);
-}
+
+
+  $(document).keydown(function(e){
+  if (e.keyCode == 37) {
+    presenterPrevious();
+    return false;
+  }
+  if (e.keyCode == 39) {
+    presenterNext();
+    return false;
+  }
+});}
 
 function resize() {
   var well = $("#controls");
   var sidebar = $("#sidebar");
   var editor_div = $("#code");
-  var html_div = $("#html");
+  var output_div = $("#output");
 
-  var code_to_html_ratio = 1.0;
+  var code_to_html_ratio = 0.5;
 
   // We subtract an additional 40 px to account for the topbar.
-  editor_div.css('height', ((sidebar.height() - well.outerHeight() - 42) * code_to_html_ratio) + 'px');
-  editor_div.css('width', sidebar.width() + 'px');
+  editor_div.css('height', (sidebar.height() - well.outerHeight() - 42) + 'px');
+  editor_div.css('width', (sidebar.width()  / 2) + 'px');
 
-  html_div.css('height', ((sidebar.height() - well.outerHeight() - 42) * (1 - code_to_html_ratio)) + 'px');
-  html_div.css('top', ((sidebar.height() - well.outerHeight() - 42) * (code_to_html_ratio)) + 'px');
-  html_div.css('position', 'relative');
+  output_div.css('height', (sidebar.height() - well.outerHeight() - 42) + 'px');
+  output_div.css('left', (sidebar.width()  / 2) + 'px');
+  output_div.css('width', (sidebar.width()  / 2) + 'px');
+  output_div.css('position', 'relative');
   editor.resize();
-  // html_editor.resize();
 }
 
 function save(key, value) {
@@ -102,16 +113,8 @@ function slideLoaded(data) {
 
   if (response['code']) {
     code = response['code'];
-
-    // Show the output console.
-    $("#top_right").css('height', '50%');
-    $("#bottom_right").css('height', '50%');
   } else {
     code = "// No code for this excercise!";
-
-    // Hide the output console.
-    $("#top_right").css('height', '100%');
-    $("#bottom_right").css('height', '0%');
   }
 
   if (response['html']) {
@@ -215,14 +218,14 @@ function reset() {
 }
 
 function setHtml(html, highlight) {
-  $("#bottom_right").html(html);
+  $("#output").html(html);
   // html_editor.getSession().setValue(html);
 
   // Should we highlight each element?
   if (!highlight) return;
 
   // Label each element in the supplied HTML.
-  $('#bottom_right').children().each(function(){
+  $('#output').children().each(function(){
     // We must treat inputs differently.
 
    if (this.nodeName.toUpperCase() == 'INPUT') {
@@ -244,12 +247,40 @@ function showHtml() {
 }
 
 function presenterShowCode() {
-  $("#sidebar").css('visibility', 'hidden');
-  $("#rightbar").css('visibility', 'visible');
-  window.console.log("yay");
+  $("#sidebar").css('visibility', 'visible');
+  $("#rightbar").css('visibility', 'hidden');
+  window.console.log("code #2");
 }
 
 function presenterShowSlide() {
   $("#sidebar").css('visibility', 'hidden');
-  $("#rightbar").css('visibility', '');
+  $("#rightbar").css('visibility', 'visible');
+  window.console.log("presenter");
 }
+
+var SLIDE = 0;
+var CODE = 1;
+var state = SLIDE;
+
+function presenterNext() {
+  if (state == SLIDE) {
+    state = CODE;
+    presenterShowCode();
+  } else {
+    state = SLIDE;
+    next();
+    presenterShowSlide();
+  }
+}
+
+function presenterPrevious() {
+  if (state == SLIDE) {
+    state = CODE;
+    presenterShowCode();
+  } else {
+    state = SLIDE;
+    previous();
+    presenterShowSlide();
+  }
+}
+

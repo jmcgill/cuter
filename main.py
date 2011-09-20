@@ -23,6 +23,16 @@ class Index(webapp.RequestHandler):
     index = template.render(path, values)
     self.response.out.write(index)
 
+class Presenter(webapp.RequestHandler):
+  def get(self, project):
+    path = os.path.join(os.path.dirname(__file__), 'presenter.html')
+    values = {
+      'project': project
+    }
+
+    index = template.render(path, values)
+    self.response.out.write(index)
+
 class Toc(webapp.RequestHandler):
   def get(self, project):
     path = os.path.join(os.path.dirname(__file__), 'toc.html')
@@ -68,6 +78,7 @@ class Slide(webapp.RequestHandler):
 application = webapp.WSGIApplication([
     ('/slide/(.*)', Slide),
     ('/toc/(.*)', Toc),
+    ('/presenter/(.*)', Presenter),
     ('/(.*)', Index),
 ], debug=True)
 
