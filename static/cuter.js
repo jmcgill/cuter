@@ -100,7 +100,7 @@ function slideLoaded(data) {
   var response = eval('(' + data + ')')
   slide.innerHTML = response['slide'];
 
-  if (response['code']) {
+  if (response['code'] && response['html']) {
     code = response['code'];
 
     // Show the output console.
