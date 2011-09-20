@@ -24,15 +24,15 @@ var toc = [
 'streetview',
 'streetview_marker',
 
-'infowindow',
-'infowindow_closures',
-'infowindow_closures2',
-'infowindow_challenge',
-
 'polylines',
 'polygons',
 
 'challenge_3', // connect markers into polygon
+
+'infowindow',
+'infowindow_closures',
+'infowindow_closures2',
+'infowindow_challenge',
 
 'kml',
 'kml_on_maps',
@@ -49,7 +49,7 @@ var toc = [
 'elevation',
 
 'places_autocomplete',
-'places',
+// 'places',
 
 'elevation_challenge'
 ];
