@@ -5,6 +5,7 @@ var toc = [
 'javascript_101',
 'logging',
 'variables',
+'challenge_0',
 'a_simple_map',
 'challenge_1',
 'challenge_2',

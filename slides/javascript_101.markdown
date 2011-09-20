@@ -4,11 +4,13 @@ Javascript is the language of the web. It is a C-style language (with squigly br
 
 By default, any code outside a function is executed when the page is loaded. Code inside a function is only run when called.
 
-Run the code on the right and see what it does. Now add
+Run the code on the right and see what it does.
+
+Then add
 
     myfunc();
 
-to the end and run it again.
+to the end of the code (to call that function), and run it again.
 
 ### Code
 // Always runs.

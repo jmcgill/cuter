@@ -6,3 +6,6 @@ This is much less annoying than using alert.
 
 ### Code
 window.console.log("Hello, world");
+
+### HTML
+<div id="output"></div>
