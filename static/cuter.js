@@ -3,6 +3,7 @@ var editor;
 var code;
 var html;
 var html_editor;
+var loaded = false;
 
 // Used to store code state when localStorage is not available. Does not persist
 // between sessions.
@@ -27,8 +28,7 @@ function main(toc) {
   if (!window.console) {
     window.console = {};
     window.console.log = function(e) {
-      document.getElementById("map_canvas").innerHTML +=
-          e + "<br>";
+      alert(e);
     }
   }
 
@@ -95,34 +95,40 @@ function remove() {
   if (history[key]) delete history[key];
 }
 
-function slideLoaded(data) {
+function slideLoaded(data, index) {
+  // Discard requests which have returned too late.
+  if (index != slide_number) {
+    return;
+  }
+  loaded = true;
+
   var slide = document.getElementById("slide");
   var response = eval('(' + data + ')')
   slide.innerHTML = response['slide'];
 
-  if (response['code'] && response['html']) {
+  if (response['code']) {
     code = response['code'];
-
-    // Show the output console.
-    $("#top_right").css('height', '50%');
-    $("#bottom_right").css('height', '50%');
-  } else {
-    code = "// No code for this excercise!";
-
-    // Hide the output console.
-    $("#top_right").css('height', '100%');
-    $("#bottom_right").css('height', '0%');
   }
 
   if (response['html']) {
+    // Show the output console.
+    $("#top_right").css('height', '50%');
+    $("#bottom_right").css('height', '50%');
+
     html = response['html'];
 
     // Add details of the HTML.
     var escaped_html = $('<div/>').text(html).html();
     slide.innerHTML += '<br><h4>HTML</h4><pre class="prettyprint">' + escaped_html + '</pre>';
   } else {
+    code = "// No code for this excercise!";
     html = "";
+
+    // Hide the output console.
+    $("#top_right").css('height', '100%');
+    $("#bottom_right").css('height', '0%');
   }
+
   setHtml(html, true);
   prettyPrint();
 
@@ -136,8 +142,11 @@ function slideLoaded(data) {
 }
 
 function setSlide(index) {
+  // Avoid saving code while still loading.
+  loading = true;
+
   // Save the code, if we can.
-  if (slide_number != null) {
+  if (loaded && slide_number != null) {
     save('' + slide_number, editor.getSession().getValue());
   }
 
@@ -162,8 +171,15 @@ function setSlide(index) {
     $("#next").addClass("disabled");
   }
 
+  // Avoid saving intermediate pieces of code.
+  loaded = false;
+
   // TODO(jmcgill): Add error on failure IMPORTANT.
-  $.get("/slide/" + slide_name, slideLoaded);
+  $.get("/slide/" + slide_name, function(index) {
+    return function(data) {
+      slideLoaded(data, index);
+    }
+  }(slide_number));
 }
 
 function getSlideNumber() {
@@ -246,7 +262,6 @@ function showHtml() {
 function presenterShowCode() {
   $("#sidebar").css('visibility', 'hidden');
   $("#rightbar").css('visibility', 'visible');
-  window.console.log("yay");
 }
 
 function presenterShowSlide() {
