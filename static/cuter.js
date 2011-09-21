@@ -47,6 +47,10 @@ function main(toc) {
   // Size the UI.
   resize();
   $(window).resize(resize);
+
+  document.getElementById('code').onkeyup = function() {
+    save('' + slide_number, editor.getSession().getValue());
+  };
 }
 
 function resize() {
