@@ -3,7 +3,6 @@ var editor;
 var code;
 var html;
 var html_editor;
-var loaded = false;
 
 // Used to store code state when localStorage is not available. Does not persist
 // between sessions.
@@ -14,6 +13,11 @@ function main(toc) {
   editor = ace.edit("code");
   editor.setTheme("ace/theme/idle_fingers");
   editor.setShowPrintMargin(false);
+
+  // Save on every key press, when editing the current slide.
+  editor.getSession().on('change', function() {
+    save('' + slide_number, editor.getSession().getValue());
+  });
 
   if ($.browser.msie) {
     editor.setHighlightActiveLine(false);
@@ -100,7 +104,6 @@ function slideLoaded(data, index) {
   if (index != slide_number) {
     return;
   }
-  loaded = true;
 
   var slide = document.getElementById("slide");
   var response = eval('(' + data + ')')
@@ -108,6 +111,8 @@ function slideLoaded(data, index) {
 
   if (response['code']) {
     code = response['code'];
+  } else {
+    code = "// No code for this excercise!";
   }
 
   if (response['html']) {
@@ -121,7 +126,6 @@ function slideLoaded(data, index) {
     var escaped_html = $('<div/>').text(html).html();
     slide.innerHTML += '<br><h4>HTML</h4><pre class="prettyprint">' + escaped_html + '</pre>';
   } else {
-    code = "// No code for this excercise!";
     html = "";
 
     // Hide the output console.
@@ -145,11 +149,6 @@ function setSlide(index) {
   // Avoid saving code while still loading.
   loading = true;
 
-  // Save the code, if we can.
-  if (loaded && slide_number != null) {
-    save('' + slide_number, editor.getSession().getValue());
-  }
-
   slide_number = index;
   slide_name = toc[index];
 
@@ -170,9 +169,6 @@ function setSlide(index) {
   } else {
     $("#next").addClass("disabled");
   }
-
-  // Avoid saving intermediate pieces of code.
-  loaded = false;
 
   // TODO(jmcgill): Add error on failure IMPORTANT.
   $.get("/slide/" + slide_name, function(index) {
