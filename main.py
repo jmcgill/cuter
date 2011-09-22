@@ -7,6 +7,7 @@ import cache
 import markdown
 import os
 import re
+import time
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -75,10 +76,21 @@ class Slide(webapp.RequestHandler):
     slide = json.dumps(output)
     self.response.out.write(slide)
 
+# HACK
+class Plus(webapp.RequestHandler):
+  def get(self):
+    path = os.path.join(os.path.dirname(__file__), 'plus.html')
+    values = {
+      'callback': self.request.get('callback')
+    }
+    plus = template.render(path, values)
+    self.response.out.write(plus)
+
 application = webapp.WSGIApplication([
     ('/slide/(.*)', Slide),
     ('/toc/(.*)', Toc),
     ('/presenter/(.*)', Presenter),
+    ('/plus', Plus),
     ('/(.*)', Index),
 ], debug=True)
 

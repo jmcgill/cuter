@@ -14,6 +14,11 @@ function main(toc) {
   editor.setTheme("ace/theme/idle_fingers");
   editor.setShowPrintMargin(false);
 
+  // Save on every key press, when editing the current slide.
+  editor.getSession().on('change', function() {
+    save('' + slide_number, editor.getSession().getValue());
+  });
+
   if ($.browser.msie) {
     editor.setHighlightActiveLine(false);
     editor.getSession().setUseWrapMode(false);
@@ -27,8 +32,7 @@ function main(toc) {
   if (!window.console) {
     window.console = {};
     window.console.log = function(e) {
-      document.getElementById("map_canvas").innerHTML +=
-          e + "<br>";
+      alert(e);
     }
   }
 
@@ -99,26 +103,27 @@ function remove() {
   if (history[key]) delete history[key];
 }
 
-function slideLoaded(data) {
+function slideLoaded(data, index) {
+  // Discard requests which have returned too late.
+  if (index != slide_number) {
+    return;
+  }
+
   var slide = document.getElementById("slide");
   var response = eval('(' + data + ')')
   slide.innerHTML = response['slide'];
 
-  if (response['code'] && response['html']) {
+  if (response['code']) {
     code = response['code'];
-
-    // Show the output console.
-    $("#top_right").css('height', '50%');
-    $("#bottom_right").css('height', '50%');
   } else {
     code = "// No code for this excercise!";
-
-    // Hide the output console.
-    $("#top_right").css('height', '100%');
-    $("#bottom_right").css('height', '0%');
   }
 
   if (response['html']) {
+    // Show the output console.
+    $("#top_right").css('height', '50%');
+    $("#bottom_right").css('height', '50%');
+
     html = response['html'];
 
     // Add details of the HTML.
@@ -126,7 +131,12 @@ function slideLoaded(data) {
     slide.innerHTML += '<br><h4>HTML</h4><pre class="prettyprint">' + escaped_html + '</pre>';
   } else {
     html = "";
+
+    // Hide the output console.
+    $("#top_right").css('height', '100%');
+    $("#bottom_right").css('height', '0%');
   }
+
   setHtml(html, true);
   prettyPrint();
 
@@ -140,10 +150,8 @@ function slideLoaded(data) {
 }
 
 function setSlide(index) {
-  // Save the code, if we can.
-  if (slide_number != null) {
-    save('' + slide_number, editor.getSession().getValue());
-  }
+  // Avoid saving code while still loading.
+  loading = true;
 
   slide_number = index;
   slide_name = toc[index];
@@ -167,7 +175,11 @@ function setSlide(index) {
   }
 
   // TODO(jmcgill): Add error on failure IMPORTANT.
-  $.get("/slide/" + slide_name, slideLoaded);
+  $.get("/slide/" + slide_name, function(index) {
+    return function(data) {
+      slideLoaded(data, index);
+    }
+  }(slide_number));
 }
 
 function getSlideNumber() {
@@ -250,7 +262,6 @@ function showHtml() {
 function presenterShowCode() {
   $("#sidebar").css('visibility', 'hidden');
   $("#rightbar").css('visibility', 'visible');
-  window.console.log("yay");
 }
 
 function presenterShowSlide() {
