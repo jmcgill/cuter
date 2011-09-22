@@ -5,7 +5,7 @@ Using the data from the Chicago Homicides table, make a program that allows the 
 **Hint:** Here's some code to read a number from a text input, and convert it to an integer, using the `parseInt` function we saw earlier:
 
     var input = document.getElementById('input');
-    var number = parseInt(input.getValue());
+    var number = parseInt(input.value);
 
 **Bonus:** If you're on a modern browser, use the [HTML5 ranged input](http://diveintohtml5.org/examples/input-type-range.html) element to build a slider, which can be used to filter the points by Age.
 
