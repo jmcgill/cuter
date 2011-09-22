@@ -9,7 +9,7 @@ The code on the left uses JSON to define an object with two properties, one of w
 ### Code
 var json = '{key: "value", an_array: [1, 2, 3]}'
 
-var object = eval('(' + json + ')')
+var object = jQuery.parseJSON(json);
 window.console.log(object.key);
 window.console.log(object.an_array);
 
