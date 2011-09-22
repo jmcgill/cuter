@@ -35,7 +35,7 @@ function initialize() {
     var polyline = new google.maps.Polyline({
       path: points,
       strokeColor: "#FF0000",
-      stokeWeight: 2
+      strokeWeight: 2
     });
     polyline.setMap(map);
 }
