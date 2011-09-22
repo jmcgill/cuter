@@ -7,10 +7,7 @@ JSON is a way of representing Javascript Objects (classes) in text. It is more r
 The code on the left uses JSON to define an object with two properties, one of which is an array.
 
 ### Code
-var json = '{
-  key: "value",
-  an_array: [1, 2, 3]
-}'
+var json = '{key: "value", an_array: [1, 2, 3]}'
 
 var object = eval('(' + json + ')')
 window.console.log(object.key);

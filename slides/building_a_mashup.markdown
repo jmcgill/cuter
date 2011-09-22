@@ -23,11 +23,11 @@ Hint: Each post has a .geoocation field. Use this code to turn it into a LatLng 
 
 ### Code
 function initialize() {
-  // Make a request to the API. This short URL points to:
+  // Make a request to the API. '/plus' redirects to:
   // https://www.googleapis.com/plus/v1/people/113590416237988391252/activities/public?key=key
 
   jQuery.ajax({
-      url: 'http://goo.gl/PyWRI',
+      url: '/plus',
       dataType: 'jsonp',
       success: requestComplete
   });

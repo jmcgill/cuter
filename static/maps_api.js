@@ -29,9 +29,9 @@ var toc = [
 
 'challenge_3', // connect markers into polygon
 
-'mashups.markdown',
-'json.markdown',
-'building_a_mashup.markdown',
+'mashups',
+'json',
+'building_a_mashup',
 
 'infowindow',
 // 'infowindow_closures',

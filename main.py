@@ -78,7 +78,7 @@ class Slide(webapp.RequestHandler):
 
 # HACK
 class Plus(webapp.RequestHandler):
-  def get(self, project):
+  def get(self):
     path = os.path.join(os.path.dirname(__file__), 'plus.html')
     values = {
       'callback': self.request.get('callback')
