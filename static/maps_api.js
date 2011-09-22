@@ -29,10 +29,14 @@ var toc = [
 
 'challenge_3', // connect markers into polygon
 
+'mashups.markdown',
+'json.markdown',
+'building_a_mashup.markdown',
+
 'infowindow',
-'infowindow_closures',
-'infowindow_closures2',
-'infowindow_challenge',
+// 'infowindow_closures',
+// 'infowindow_closures2',
+// 'infowindow_challenge',
 
 'kml',
 'kml_on_maps',
