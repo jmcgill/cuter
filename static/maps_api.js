@@ -10,6 +10,7 @@ var toc = [
 'page_structure',
 'a_simple_map',
 'styled_map',
+'form',
 
 'marker',
 'custom_markers',
