@@ -35,9 +35,6 @@ var toc = [
 'building_a_mashup',
 
 'infowindow',
-// 'infowindow_closures',
-// 'infowindow_closures2',
-// 'infowindow_challenge',
 
 'kml',
 'kml_on_maps',
@@ -53,8 +50,13 @@ var toc = [
 
 'elevation',
 
-'places_autocomplete',
+// 'places_autocomplete',
 // 'places',
 
-'elevation_challenge'
+'elevation_challenge',
+
+'the_end',
+'infowindow_closures',
+'infowindow_closures2',
+'infowindow_challenge',
 ];

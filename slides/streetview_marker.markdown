@@ -11,8 +11,6 @@ Try adding a Marker with LatLng `-27.468271, 153.005953`, which is the position 
 
 Next, change the heading of the panorama so it points towards the Marker.
 
-**Bonus:** compute the correct heading programmatically using the [computeHeading](http://code.google.com/apis/maps/documentation/javascript/reference.html#spherical) function.
-
 ### Code
 function initialize() {
     var myOptions = {
@@ -27,3 +25,16 @@ function initialize() {
     var pano = new google.maps.StreetViewPanorama(document.getElementById('map_canvas'), myOptions);
 }
 
+### Answer
+function initialize() {
+    var myOptions = {
+        position: new google.maps.LatLng(-27.46841, 153.00589),
+        pov: {
+            heading: 30,
+            pitch: 3,
+            zoom: 1
+        }
+    };
+
+    var pano = new google.maps.StreetViewPanorama(document.getElementById('map_canvas'), myOptions);
+}

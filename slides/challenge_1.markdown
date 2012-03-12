@@ -13,3 +13,24 @@ The first challenge is to write a program that places a marker on the map each t
 
 ### Code
 
+### Answer
+var map;
+
+function initialize() {
+    var myOptions = {
+      zoom: 12,
+      center: new google.maps.LatLng(-27.463347, 153.02496),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
+    map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
+    google.maps.event.addListener(map, 'click', showMarker);
+}
+
+function showMarker(details) {
+    var options = {
+      position: details.latLng,
+    };
+    var marker = new google.maps.Marker(options);
+    marker.setMap(map);
+}

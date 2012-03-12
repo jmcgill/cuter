@@ -1,12 +1,10 @@
-### Exercise: Geocoder
+### Challenge: Geocoder
 
 As mentioned on the previous slide, some address strings are ambiguous and may have multiple results.
 
 Modify the code on the left make a request to the `Geocoder` for "Brisbane" and then place a marker at each of the results.
 
 **Bonus:** Reposition the map to fit each of the markers on the map. See {LatLngBounds} and `{Map}.fitBounds`.
-
-**Bonus &times; 2:** Set the title of the marker to be the full address of the geocoded location.  See {GeocoderResult} and {GeocoderAddressComponent}.
 
 ### Code
 function initialize() {

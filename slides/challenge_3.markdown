@@ -1,4 +1,4 @@
-### Challenge 3: Drawing shapes
+### Challenge 2: Drawing shapes
 
 Extend your code from [Challenge 1](javascript:setSlide(13)) to draw a {Polygon} by connecting each {Marker} added to the map.
 

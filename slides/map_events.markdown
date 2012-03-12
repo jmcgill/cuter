@@ -19,5 +19,5 @@ function initialize() {
 }
 
 function eventHandler(details) {
-  alert(details.latLng.toString());
+  window.console.log(details.latLng);
 }
