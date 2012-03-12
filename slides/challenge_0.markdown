@@ -12,3 +12,7 @@ parameter (`10`) means that the number is parsed as base 10.
 
 ### HTML
 
+### Answer
+var a = prompt('Enter number one.'); 
+var b = prompt('Enter number two.');
+alert(parseInt(a, 10) + parseInt(b, 10)); 

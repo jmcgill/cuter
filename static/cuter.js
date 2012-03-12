@@ -3,6 +3,11 @@ var editor;
 var code;
 var html;
 var html_editor;
+var answer_timeout;
+var slide_name;
+
+// Milliseconds between polling for answers.
+var kAnswerTimeout = 15000;
 
 // Used to store code state when localStorage is not available. Does not persist
 // between sessions.
@@ -137,6 +142,15 @@ function slideLoaded(data, index) {
     $("#bottom_right").css('height', '0%');
   }
 
+  // Does this page have an answer available?
+  if (response['answer']) {
+    if (answer_timeout) {
+      window.clearTimeout(answer_timeout);
+    }
+    answer_timeout = window.setTimeout(pollAnswer, 100);
+    slide.innerHTML += '<input id="show_answer_btn" class="btn disabled" type="button" value="Show Answer">';
+  }
+
   setHtml(html, true);
   prettyPrint();
 
@@ -147,6 +161,24 @@ function slideLoaded(data, index) {
   } else {
     editor.getSession().setValue(code);
   }
+}
+
+// Poll the server to see if an answer is available for this challenge.
+function pollAnswer() {
+  var nonse = Math.round((new Date().getTime()) / (kAnswerTimeout / 2));
+  window.console.log('Polling: ', nonse);
+  $.get('/answers/read/maps_api', {'name': slide_name, 'nonse': nonse}, function(data) {
+    if (data != "") {
+      var btn = document.getElementById('show_answer_btn');
+      $(btn).click(function() {
+        var slide = document.getElementById("slide");
+        slide.innerHTML += '<br><br><pre class="prettyprint">' + data + '</pre>'; 
+      });
+      $(btn).removeClass('disabled');
+    } else {
+      answer_timeout = window.setTimeout(pollAnswer, kAnswerTimeout);
+    }
+  });
 }
 
 function setSlide(index) {

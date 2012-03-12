@@ -1,5 +1,5 @@
 application: code-tutor
-version: 1
+version: 2
 runtime: python
 default_expiration: "1h"
 api_version: 1

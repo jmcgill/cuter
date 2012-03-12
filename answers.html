@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ project }}</title>
+    <!-- A modified version of Twitters Bootstrap CSS with auto-globbing of inputs disabled -->
+    <link rel="stylesheet" href="/static/twitter.css">
+    <link rel="stylesheet" href="/google-code-prettify/prettify.css">
+    <style type="text/css">
+    html,body {
+      height: 100%;
+    }
+
+    p {
+      font-size: 15px;
+    }
+
+    code {
+      background: whiteSmoke;
+    }
+    </style>
+    <script src="/static/storage.js" type="text/javascript"></script>
+    <script src="/static/{{ project }}.js" type="text/javascript"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+    function main() {
+      // TODO(jmcgill): Show open answers.
+      var innerHTML = "";
+      for (var i = 0; i < toc.length; ++i) {
+        innerHTML += toc[i] + ' <a href="#" onclick="foo(\'' + toc[i] + '\')">Open answer</a><br>'; 
+      }
+      document.getElementById('container').innerHTML = innerHTML;
+    }
+
+    function foo(name) {
+      $.post("/answers/open", { project: "{{ project }}", name: name }, function(data) {
+        alert(data);
+      });    
+    }
+
+    function clear_answers() {
+      $.post("/answers/clear", { project: "{{ project }}" }, function(data) {
+        alert(data);
+      });
+    }
+    </script>
+  </head>
+  <body onload="main()">
+    <a href="#" onclick="clear_answers()">Clear All</a>
+    <div id="container"></div>
+  </body>
+
+</html>

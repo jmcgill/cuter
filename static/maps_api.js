@@ -42,9 +42,9 @@ var toc = [
 'kml',
 'kml_on_maps',
 
-'fusion_tables',
-'fusion_tables_pretty',
-'fusion_tables_challenge',
+// 'fusion_tables',
+// 'fusion_tables_pretty',
+// 'fusion_tables_challenge',
 
 'geocoder',
 'geocoder_exercise',
