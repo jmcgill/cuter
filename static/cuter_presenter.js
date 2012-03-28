@@ -114,7 +114,7 @@ function slideLoaded(data) {
   if (response['code']) {
     code = response['code'];
   } else {
-    code = "// No code for this excercise!";
+    code = "// No code for this exercise!";
   }
 
   if (response['html']) {
